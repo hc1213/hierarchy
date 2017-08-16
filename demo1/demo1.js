@@ -8,7 +8,7 @@ window.onload = function(){
 	// 滑动屏幕时执行监控函数
 	window.onscroll = function(){
 		let toTop = document.body.scrollTop;
-		if(toTop >= _clientHeight){
+		if(toTop >= (_clientHeight*3/4)){
 			btn.style.display="block";
 		}else{
 			btn.style.display="none";
