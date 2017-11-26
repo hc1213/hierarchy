@@ -4,6 +4,6 @@
 - 技术不是最终目标。解决方法才是。
 
 ## 页面链接
-- [家庭关系计算器](https://hc1213.github.io/demo/demo0/index)
-- [返回顶部](https://hc1213.github.io/demo/demo1/index)
-- [Loading效果](https://hc1213.github.io/demo/demo2/index)
+- [家庭关系计算器](https://hc1213.github.io/some_pages/demo0/index)
+- [返回顶部](https://hc1213.github.io/some_pages/demo1/index)
+- [Loading效果](https://hc1213.github.io/some_pages/demo2/index)
