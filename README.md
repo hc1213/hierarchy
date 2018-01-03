@@ -8,6 +8,7 @@
 - [返回顶部](https://hc1213.github.io/some_pages/demo1/index)
 - [Loading效果](https://hc1213.github.io/some_pages/demo2/index)
 - [选项卡](https://hc1213.github.io/some_pages/pages/index1)
-- [选项卡](https://hc1213.github.io/some_pages/pages/index2)
+- [正则专辑](https://hc1213.github.io/some_pages/pages/index2)
+- [表单专辑](https://hc1213.github.io/some_pages/pages/index3)
 
 
