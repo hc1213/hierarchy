@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS面向对象编程</title>
+    <link rel="stylesheet" href="./monokai-sublime.css">
+    <link rel="stylesheet" href="./style.less">
+</head>
+<body>
+    <h1>面向对象编程</h1>
+    <p>js的精髓或者说重点就是原型集成了。不同于java的class，js没有类的概念。定义类是通过原型继承来实现的。</p>
+    <br/>
+    <p>比如说要创建一个叫 dshu 的学生。但是没有student 的class，这个要怎么创建呢。</p>
+    <pre>
+        <code class="javascript">
+            我们可以这样:
+            var Student = {
+                name:'studentName',
+                gender:'studentMale',
+                age:'studentAge',
+                say:function(){
+                    console.log('我的名字是:',this.name)
+                }
+            }//定义一个Student
+        </code>
+    </pre>
+    <p>这时候可以来创建一个dshu的对象</p>
+    <pre>
+        <code class="javascript">
+            var dshu = {
+                name:'dshu'
+            };
+            dshu.__proto__ = Student;
+        </code>
+    </pre>
+
+    <script src="./highlight.pack.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+</html>

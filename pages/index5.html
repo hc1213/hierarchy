@@ -147,17 +147,24 @@
                 return false
             };
             eleDrags[i].ondragenter = function (ev) {
-                event.preventDefault();
+                ev.preventDefault();
                this.className = 'draglist dragIn'
                 return true;
             };
             eleDrags[i].ondragover = function (ev) {
                 ev.preventDefault()
-               this.className = 'draglist'
+               this.className = 'draglist dragIn'
                 return true;
             };
+            eleDrags[i].ondragleave = function (ev) {
+                    ev.preventDefault()
+                    this.className = 'draglist'
+                    return true;
+                };
              eleDrags[i].ondrop = function (ev) {
-                console.log('this--->')
+                console.log('this--->',ev);
+                this.className = 'draglist';
+                alert('drop events')
               return true;
             };
         }
