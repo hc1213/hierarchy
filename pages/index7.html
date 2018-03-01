@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="./monokai-sublime.css">
     <link rel="stylesheet" href="./style.less">
 </head>
+
 <body>
     <h1>面向对象编程</h1>
     <p>js的精髓或者说重点就是原型集成了。不同于java的class，js没有类的概念。定义类是通过原型继承来实现的。</p>
@@ -35,10 +37,44 @@
             dshu.__proto__ = Student;
         </code>
     </pre>
+    <p>JavaScript 对每个创建的对象都会设置一个原型，指向它的原型对象。</p>
+    <pre>
+        <code class="javascript">
+            var arr = [1,2,3];
+            原型链是  arr---> Array.prototype ---> Object.prototype ---> null
+
+            var foo = v =>v
+            原型链是 foo ---> Function.prototype ---> Object.prototype ---> null
+        </code>
+    </pre>
+
+    <p>下面开始，我们来用一种构造函数的思想来创建对象</p>
+    <pre>
+        <code class="javascript">
+            function Student(name){
+                this.name = name;
+                this.say = function(){
+                    console.log('hello,',this.name)
+                }
+            }
+        </code>
+    </pre>
+
+    <p>到目前为止，这只是一个简单的函数，但是我们可以用 <span class="keyWord">new</span>关键字来调用这个函数，借此创建一个新的对象</p>
+
+    <pre>
+        <code class="javascript">
+            var dshu = new Student('dshu');
+            此时dshu 的原型链是
+            dshu ---> Student.prototype ---> Object.prototype ---> null
+            dshu.constructor == Student;//return true
+        </code>
+    </pre>
 
     <script src="./highlight.pack.js"></script>
     <script>
         hljs.initHighlightingOnLoad();
     </script>
 </body>
+
 </html>
