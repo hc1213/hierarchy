@@ -5,6 +5,6 @@
 - 知识要成体系
 
 ## HAVE FUN
-- [Loading](https://hc1213.github.io/hierarchy/pages/html/html01.html)
+- [纯html标签页面](https://hc1213.github.io/hierarchy/pages/origin/html01.html)
 
 
