@@ -1,51 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>MVVM</title>
 </head>
-
 <body>
-    <div id="vue-container"></div>
-    <script>
-        // 首先，确定在数据更新时候能够获取提示
-        function info(){
-            this.cc = '22'
-        }
-        let data = new info()
-        data.name = 'dshu'
-        observe(data)
 
-        function observe(obj) {
-            if (!obj || typeof obj !== 'object') {
-                return
+<div id="mvvm-app">
+    <input type="text" v-model="someStr">
+    <p>{{ info.title }}</p>
+    <input type="text" v-model="child.someStr">
+    <!-- <p v-class="className" class="abc">
+        {{someStr}}
+        <span v-text="child.someStr"></span>
+    </p> -->
+    <p>{{ getHelloWord }}</p>
+    <p v-html="htmlStr"></p>
+    <button v-on:click="clickBtn">change model</button>
+</div>
+
+<!-- <script src="http://cdn.bootcss.com/vue/1.0.25/vue.js"></script> -->
+<script src="./observer.js"></script>
+<script src="./watcher.js"></script>
+<script src="./compile.js"></script>
+<script src="./mvvm.js"></script>
+<script>
+    var vm = new MVVM({
+        el: '#mvvm-app',
+        data: {
+            someStr: 'hello ',
+            className: 'btn',
+            info:{
+                title:'info'
+            },
+            htmlStr: '<span style="color: #f00;">red</span>',
+            child: {
+                someStr: 'World !'
             }
-            Object.keys(obj).forEach(key => {
-                defineReactive(obj, key, obj[key])
-            })
+        },
+        computed: {
+            getHelloWord: function() {
+                return this.someStr + this.child.someStr;
+            }
+        },
+        methods: {
+            clickBtn: function(e) {
+                var randomStrArr = ['childOne', 'childTwo', 'childThree'];
+                this.child.someStr = randomStrArr[parseInt(Math.random() * 3)];
+            }
         }
+    });
+    vm.$watch('child.someStr', function() {
+        console.log(arguments);
+    });
+</script>
 
-        function defineReactive(obj, key, value) {
-            Object.defineProperty(obj, key, {
-                enumerable: true, //可枚举
-                configurable: false, //不可再更改
-                get: function () {
-                    return value
-                },
-                set: function (newValue) {
-                    console.log('拿到set函数啦~')
-                    showChange(newValue)
-                    value = newValue
-                }
-            })
-        }
-        function showChange(value) {
-            document.querySelector('#vue-container').innerHTML = value
-        }
-    </script>
 </body>
-
 </html>
