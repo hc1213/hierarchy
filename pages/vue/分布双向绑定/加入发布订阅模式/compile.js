@@ -26,23 +26,23 @@ class Compile {
                 })
                 node.textContent = text.replace(reg, val)
             }
-            if (node.nodeType === 1) {
-                let nodeAttrs = node.attributes
-                Array.from(nodeAttrs).forEach(attr => {
-                    let exp = attr.value
-                    if (attr.name.indexOf('v-') == 0) {
-                        node.value = this.$vm[exp]
-                    }
-                    new Watcher(this.$vm, exp, (newVlue) => {
-                        node.value = newVlue
-                    })
-                    node.addEventListener('input', e => {
-                        let newVal = e.target.value
-                        this.$vm[exp] = newVal
-                    })
+            // if (node.nodeType === 1) {
+            //     let nodeAttrs = node.attributes
+            //     Array.from(nodeAttrs).forEach(attr => {
+            //         let exp = attr.value
+            //         if (attr.name.indexOf('v-') == 0) {
+            //             node.value = this.$vm[exp]
+            //         }
+            //         new Watcher(this.$vm, exp, (newVlue) => {
+            //             node.value = newVlue
+            //         })
+            //         node.addEventListener('input', e => {
+            //             let newVal = e.target.value
+            //             this.$vm[exp] = newVal
+            //         })
 
-                })
-            }
+            //     })
+            // }
             if (node.childNodes) {
                 this.changeNode(node)
             }
