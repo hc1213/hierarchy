@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原生AJAX</title>
+</head>
+
+<body>
+    <button onclick="setInfo()"> click me to set!</button>
+    <div class="info">here is the info id!</div>
+    <br>
+    <button onclick="getInfo()"> click me to get!</button>
+    <div class="info">here is the info!</div>
+
+    <button onclick="getInfoSync()"> click me to sync get!</button>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <script src="./axios.js"></script>
+    <script>
+        let apiHost = 'https://api.myjson.com/bins'
+
+        function getInfo() {
+            return new Promise((res,rej) => {
+                axios({
+                    url: 'https://api.myjson.com/bins/ztsne',
+                }).then(resp => {
+                    console.log('resp===>', resp)
+                    return res(resp)
+                })
+            })
+        }
+
+        // function setInfo() {
+        //     axios({
+        //         url: apiHost,
+        //         method: 'post',
+        //         data: {
+        //             info: 'hello world'
+        //         }
+        //     }).then(resp=>{
+        //         console.log('resp===>', resp)
+        //     })
+        // }
+
+        async function getInfoSync() {
+            let info = await getInfo()
+            console.log('info===>', info)
+        }
+        // 封装一个简单的Ajax函数
+        function ajax(options = {}) {
+            options.method = options.method ? options.method.toUpperCase() : 'GET'
+            options.type = options.type || 'json'
+            let xhr = new XMLHttpRequest()
+            xhr.responseType = options.type
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        options.success(xhr.response)
+                    } else {
+                        options.error(new Error(xhr.statusText))
+                    }
+                }
+            }
+
+            xhr.open(options.method, options.url, true)
+            if (options.method === 'POST') {
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            }
+            xhr.send(options.method == 'POST' ? JSON.stringify(options.data) : null)
+        }
+    </script>
+</body>
+
+</html>
