@@ -10,65 +10,51 @@
 
 <body>
     <button onclick="setInfo()"> click me to set!</button>
-    <div class="info">here is the info id!</div>
+    <div class="infoSet">here is the info id!</div>
     <br>
     <button onclick="getInfo()"> click me to get!</button>
-    <div class="info">here is the info!</div>
+    <div class="infoGet">here is the info!</div>
 
     <button onclick="getInfoSync()"> click me to sync get!</button>
     <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <script src="./axios.js"></script>
     <script>
-        let apiHost = 'https://api.myjson.com/bins'
+        let apiHost = 'https://api.myjson.com/bins',
+            getUrl
 
         function getInfo() {
-            return new Promise((res,rej) => {
+            if (!getUrl) {
+                return alert('先要存才能取')
+            }
+            return new Promise((res, rej) => {
                 axios({
-                    url: 'https://api.myjson.com/bins/ztsne',
+                    url: getUrl,
                 }).then(resp => {
-                    console.log('resp===>', resp)
+                    console.log('get resp===>', resp)
                     return res(resp)
                 })
             })
         }
 
-        // function setInfo() {
-        //     axios({
-        //         url: apiHost,
-        //         method: 'post',
-        //         data: {
-        //             info: 'hello world'
-        //         }
-        //     }).then(resp=>{
-        //         console.log('resp===>', resp)
-        //     })
-        // }
+        function setInfo() {
+            axios({
+                url: 'https://api.myjson.com/bins',
+                method: 'post',
+                data: {
+                    info: 'hello myjson',
+                    ts: Date.now()
+                }
+            }).then(resp => {
+                console.log('set resp==>', resp)
+                document.querySelector('.infoSet').innerHTML = resp.uri
+                getUrl = resp.uri
+            })
+        }
 
         async function getInfoSync() {
             let info = await getInfo()
             console.log('info===>', info)
-        }
-        // 封装一个简单的Ajax函数
-        function ajax(options = {}) {
-            options.method = options.method ? options.method.toUpperCase() : 'GET'
-            options.type = options.type || 'json'
-            let xhr = new XMLHttpRequest()
-            xhr.responseType = options.type
-            xhr.onreadystatechange = () => {
-                if (xhr.readyState === 4) {
-                    if (xhr.status >= 200 && xhr.status < 300) {
-                        options.success(xhr.response)
-                    } else {
-                        options.error(new Error(xhr.statusText))
-                    }
-                }
-            }
-
-            xhr.open(options.method, options.url, true)
-            if (options.method === 'POST') {
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-            }
-            xhr.send(options.method == 'POST' ? JSON.stringify(options.data) : null)
+            document.querySelector('.infoGet').innerHTML = info.info
         }
     </script>
 </body>

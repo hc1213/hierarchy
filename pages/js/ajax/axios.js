@@ -27,7 +27,7 @@ function axios(options = {}) {
 
         xhr.open(options.method, options.url, true)
         if (options.method === 'POST') {
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            xhr.setRequestHeader('Content-Type', 'application/json')
         }
         xhr.send(options.method == 'POST' ? JSON.stringify(options.data) : null)
     })
