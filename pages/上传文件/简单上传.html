@@ -12,7 +12,7 @@
     </style>
   </head>
   <body>
-    <input id="fileItem"  multiple type="file" />
+    <input id="fileItem" accept=".png,.jpg,.gif,.jpeg" multiple type="file" />
     <div id="output" style="width:250px;"></div>
     <div id="progress"></div>
 
@@ -27,7 +27,7 @@
           type = "default",
           reader = new FileReader();
         url = window.webkitURL.createObjectURL(files[0]);
-        console.log('url====>',url)
+        console.log("url====>", url);
         if (/image/.test(files[0].type)) {
           reader.readAsDataURL(files[0]);
           type = "text";
